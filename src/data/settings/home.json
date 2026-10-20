@@ -5,9 +5,9 @@
     "archive",
     "tag"
   ],
-  "showIntroLead": false,
+  "showIntroLead": true,
   "showIntroMore": false,
-  "heroPresetId": "none",
+  "heroPresetId": "default",
   "heroImageSrc": null,
   "heroImageAlt": "Whono theme preview"
 }
