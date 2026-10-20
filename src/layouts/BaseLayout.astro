@@ -222,7 +222,11 @@ const adminUiPrefsScriptHref = isDevAdminPage
       <main id="content" class="content" tabindex="-1">
         <div class="content__inner">
           <slot />
-          <footer class="site-footer">© {yearRange} {footerCopyright}</footer>
+          <footer class="site-footer">© {yearRange} {footerCopyright.split(/(\bcxro\b)/).map((part) =>
+            part === 'cxro'
+              ? <a href="https://github.com/cxro/astro-whono" title="Astro Whono on GitHub" style="color: inherit">{part}</a>
+              : part
+          )}</footer>
         </div>
       </main>
     </div>
