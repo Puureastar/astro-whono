@@ -17,11 +17,11 @@ if (
 
 export const site = {
   url: hasSiteUrl ? siteUrl : fallbackSiteUrl,
-  title: 'Astro Themes by Whono',
-  brandTitle: 'Whono',
-  author: 'Whono',
-  authorAvatar: 'author/avatar.webp',
-  description: '一个 Astro 主题的展示站：轻量、可维护、可复用。'
+  title: "Pureastar's Blog",
+  brandTitle: 'Nivalis',
+  author: 'Pureastar',
+  authorAvatar: '',
+  description: '邮茉莉的小站'
 };
 
 export const PAGE_SIZE_ARCHIVE = 12;

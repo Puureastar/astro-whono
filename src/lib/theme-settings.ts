@@ -522,7 +522,7 @@ const DEFAULT_PAGE: PageSettings = {
     subtitle: LEGACY_BITS_SUBTITLE,
     defaultAuthor: {
       name: 'Whono',
-      avatar: 'author/avatar.webp'
+      avatar: ''
     }
   },
   memo: {

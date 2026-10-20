@@ -200,15 +200,15 @@ describe('admin preview api', () => {
     expect(result.html).toContain(`<h2 data-admin-outline-key="${second!.key}">Same</h2>`);
   });
 
-  it('renders representative existing content structures', async () => {
+  it('renders representative fixtures independently of personal content', async () => {
     const { renderAdminMarkdownPreview } = await import('../src/lib/admin-console/preview');
     const { splitMarkdownFrontmatter } = await import('../src/lib/admin-console/frontmatter');
 
     const markdownGuide = splitMarkdownFrontmatter(
-      await readFile('src/content/essay/markdown-guide.md', 'utf8')
+      await readFile('src/test-fixtures/admin-preview.md', 'utf8')
     ).bodyText;
     const memo = splitMarkdownFrontmatter(
-      await readFile('src/content/memo/index.md', 'utf8')
+      await readFile('src/test-fixtures/admin-preview.md', 'utf8')
     ).bodyText;
 
     const markdownGuideResult = await renderAdminMarkdownPreview({
@@ -308,7 +308,8 @@ describe('admin preview api', () => {
     expect(payload.result.html).not.toContain('about-site-info__eyebrow');
     expect(payload.result.html).not.toContain('src="/author/avatar.webp"');
     expect(payload.result.html).toContain('class="contact-list"');
-    expect(payload.result.html).toContain('href="https://github.com/cxro/astro-whono"');
+    const github = getThemeSettings().settings.site.socialLinks.github;
+    if (github) expect(payload.result.html).toContain(`href="${github}"`);
     expect(payload.result.html).toContain(`href="mailto:${getThemeSettings().settings.site.socialLinks.email}"`);
     expect(payload.result.html).not.toContain('data-about-contact-links');
     expect(payload.result.html).not.toContain('javascript:alert');

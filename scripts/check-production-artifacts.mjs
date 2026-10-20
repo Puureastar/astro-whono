@@ -298,36 +298,38 @@ export const runProductionArtifactCheck = async (options = {}) => {
     ? JSON.parse(readFileSync('src/data/settings/page.json', 'utf8'))
     : null;
   const { site } = await import('../site.config.mjs');
-  const rawAvatar = pageSettings?.bits?.defaultAuthor?.avatar ?? site.authorAvatar ?? 'author/avatar.webp';
+  const rawAvatar = pageSettings?.bits?.defaultAuthor?.avatar ?? site.authorAvatar ?? '';
   expect(
-    typeof rawAvatar === 'string' && rawAvatar.trim().length > 0,
-    'Bits default author avatar is missing from page settings / site config'
+    typeof rawAvatar === 'string',
+    'Bits default author avatar must be a string (empty uses initials)'
   );
 
-  const normalizedAvatar = rawAvatar.trim().replace(/\\/g, '/').replace(/^\.\/+/, '');
-  const hasInvalidAvatarPath =
-    normalizedAvatar.startsWith('/') ||
-    normalizedAvatar.startsWith('//') ||
-    normalizedAvatar.startsWith('public/') ||
-    /^[A-Za-z]+:\/\//.test(normalizedAvatar) ||
-    /(^|\/)\.\.(?:\/|$)/.test(normalizedAvatar) ||
-    normalizedAvatar.includes('?') ||
-    normalizedAvatar.includes('#');
+  if (rawAvatar.trim()) {
+    const normalizedAvatar = rawAvatar.trim().replace(/\\/g, '/').replace(/^\.\/+/, '');
+    const hasInvalidAvatarPath =
+      normalizedAvatar.startsWith('/') ||
+      normalizedAvatar.startsWith('//') ||
+      normalizedAvatar.startsWith('public/') ||
+      /^[A-Za-z]+:\/\//.test(normalizedAvatar) ||
+      /(^|\/)\.\.(?:\/|$)/.test(normalizedAvatar) ||
+      normalizedAvatar.includes('?') ||
+      normalizedAvatar.includes('#');
 
-  expect(
-    !hasInvalidAvatarPath,
-    `Bits default author avatar must stay a relative public/** image path: ${rawAvatar}`
-  );
-  expect(
-    /\.(avif|gif|jpe?g|png|svg|webp)$/i.test(normalizedAvatar),
-    `Bits default author avatar must point to an image file: ${rawAvatar}`
-  );
-
-  const avatarFilePath = `public/${normalizedAvatar}`;
-  if (!existsSync(avatarFilePath)) {
-    console.warn(
-      `[check:prod-artifacts] Bits default author avatar points to a missing file; the public UI will fall back to initials: ${avatarFilePath}`
+    expect(
+      !hasInvalidAvatarPath,
+      `Bits default author avatar must stay a relative public/** image path: ${rawAvatar}`
     );
+    expect(
+      /\.(avif|gif|jpe?g|png|svg|webp)$/i.test(normalizedAvatar),
+      `Bits default author avatar must point to an image file: ${rawAvatar}`
+    );
+
+    const avatarFilePath = `public/${normalizedAvatar}`;
+    if (!existsSync(avatarFilePath)) {
+      console.warn(
+        `[check:prod-artifacts] Bits default author avatar points to a missing file; the public UI will fall back to initials: ${avatarFilePath}`
+      );
+    }
   }
 
   const getRssItemLinks = (xml) =>

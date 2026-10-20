@@ -43,10 +43,8 @@ const FIELD_CONFIGS: readonly ThemeImageFieldConfig[] = [
     buttonSelector: '[data-admin-images-open="home.heroImageSrc"]',
     pickerTitle: '更换 Hero 图片',
     pickerDescription: '',
-    pickerResetLabel: '恢复默认',
-    pickerResetStatus: '已恢复 Hero 默认图',
-    pickerFallbackCurrentValue: 'src/assets/hero.png',
-    pickerFallbackCurrentLabel: '默认图片'
+    pickerResetLabel: '清空图片',
+    pickerResetStatus: '已清空首页图片',
   },
   {
     field: 'page.bits.defaultAuthor.avatar',

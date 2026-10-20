@@ -29,8 +29,8 @@ $$
 
 <figure class="figure figure--md figure--left">
   <picture>
-    <source srcset="/images/archive/demo-archive-03.webp" type="image/webp" />
-    <img src="/images/archive/demo-archive-02.webp" alt="Smoke fixture standalone figure" />
+    <source srcset="/favicon.svg" type="image/svg+xml" />
+    <img src="/favicon.svg" alt="Smoke fixture standalone figure" />
   </picture>
   <figcaption class="figure-caption">Smoke fixture standalone figure</figcaption>
 </figure>
@@ -40,13 +40,13 @@ $$
 <ul class="gallery cols-2">
   <li>
     <figure>
-      <img src="/images/archive/demo-archive-01.webp" alt="Smoke fixture gallery item 1" />
+      <img src="/favicon.svg" alt="Smoke fixture gallery item 1" />
       <figcaption>Smoke fixture gallery item 1</figcaption>
     </figure>
   </li>
   <li>
     <figure>
-      <img src="/images/archive/demo-archive-02.webp" alt="Smoke fixture gallery item 2" />
+      <img src="/favicon.svg" alt="Smoke fixture gallery item 2" />
     </figure>
   </li>
 </ul>

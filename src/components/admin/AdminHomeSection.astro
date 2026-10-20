@@ -7,7 +7,6 @@ import {
   ADMIN_HOME_INTRO_LINK_DEFAULT,
   ADMIN_HOME_INTRO_LINK_OPTIONS
 } from '../../lib/admin-console/theme-shared';
-import defaultHero from '../../assets/hero.png';
 
 interface Props {
   homeIntroMaxLength: number;
@@ -35,7 +34,7 @@ const { homeIntroMaxLength } = Astro.props;
                 <AdminHelpTip
                   id="home-hero-image-src-tip"
                   label="Hero 图片地址说明"
-                  text="支持 src/assets/**、public/** 或 https:// 图床链接；地址留空时回退内置默认图。"
+                  text="支持 src/assets/**、public/** 或 https:// 图床链接；地址留空时不显示图片。"
                 />
               </span>
               <label class="admin-label__toggle" for="home-show-hero">
@@ -50,7 +49,7 @@ const { homeIntroMaxLength } = Astro.props;
                 type="text"
                 inputmode="url"
                 spellcheck="false"
-                placeholder="当前使用：src/assets/hero.png"
+                placeholder="请选择你自己的首页图片"
                 aria-label="Hero 图片地址"
                 aria-describedby="home-hero-image-src-tip"
               />
@@ -85,7 +84,7 @@ const { homeIntroMaxLength } = Astro.props;
           <div
             class="admin-images-field-preview admin-images-field-preview--hero"
             data-admin-images-preview="home.heroImageSrc"
-            data-admin-images-default-preview-src={defaultHero.src}
+            data-admin-images-default-preview-src=""
             hidden
           >
             <img alt="" loading="lazy" decoding="async" data-admin-images-preview-img="home.heroImageSrc" />

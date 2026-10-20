@@ -16,11 +16,12 @@ const base = import.meta.env.BASE_URL ?? '/';
 const withBase = createWithBase(base);
 const {
   settings: {
+    site: { title: siteTitle },
     home: { introLead, introMore, introMoreLinks, showIntroLead, showIntroMore, heroPresetId, heroImageSrc, heroImageAlt },
     ui: { articleMeta, typography }
   }
 } = getThemeSettings();
-const shouldShowHero = heroPresetId !== 'none';
+const shouldShowHero = heroPresetId !== 'none' && Boolean(heroImageSrc);
 const shouldShowIntro = showIntroLead || showIntroMore;
 const homeBodyClass = [
   'home',
@@ -656,7 +657,7 @@ body[data-reading="immersive"] .reader-toggle .icon-book-open {
 
 <BaseLayout bodyClass={homeBodyClass} deferGlobalStyles={true}>
   <style slot="head" is:inline set:html={homeHeadCriticalCss}></style>
-  <h1 class="sr-only">Astro Themes by Whono</h1>
+  <h1 class="sr-only">{siteTitle}</h1>
   {
     shouldShowHero && (
       <div class="hero">
