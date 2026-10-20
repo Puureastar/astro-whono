@@ -1,13 +1,13 @@
 {
-  "introLead": "这是一个开源写作主题与示例内容库:包含 随笔/essay、小记/memo、归档/archive 与 絮语/bits，使用与配置请见 README 。",
+  "introLead": "不知道",
   "introMore": "更多文章请访问",
   "introMoreLinks": [
     "archive",
     "tag"
   ],
-  "showIntroLead": true,
-  "showIntroMore": true,
-  "heroPresetId": "default",
+  "showIntroLead": false,
+  "showIntroMore": false,
+  "heroPresetId": "none",
   "heroImageSrc": null,
   "heroImageAlt": "Whono theme preview"
 }

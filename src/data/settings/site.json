@@ -1,11 +1,11 @@
 {
-  "title": "Astro Themes by Whono",
-  "description": "一个极简双栏 Astro 主题的展示站",
+  "title": "Pureastar's Blog",
+  "description": "邮茉莉的小站",
   "defaultLocale": "zh-CN",
   "footer": {
-    "startYear": 2025,
+    "startYear": 2024,
     "showCurrentYear": true,
-    "copyright": "Whono · Theme Demo · by cxro"
+    "copyright": "Pureastar · Theme by cxro"
   },
   "adminOverview": {
     "publicVisible": true,
@@ -17,13 +17,13 @@
     "appleTouchIcon": null
   },
   "socialLinks": {
-    "github": "https://github.com/cxro/astro-whono",
-    "x": "https://twitter.com/yourname",
-    "email": "Astro@Whono.me",
+    "github": "https://github.com/pureastar",
+    "x": null,
+    "email": "me@pureastar.top",
     "presetOrder": {
       "github": 1,
-      "x": 2,
-      "email": 3
+      "x": 3,
+      "email": 2
     },
     "custom": []
   }
