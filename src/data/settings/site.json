@@ -3,7 +3,7 @@
   "description": "邮茉莉的小站",
   "defaultLocale": "zh-CN",
   "footer": {
-    "startYear": 2024,
+    "startYear": 2023,
     "showCurrentYear": true,
     "copyright": "Pureastar · Theme by cxro"
   },
@@ -13,8 +13,8 @@
   },
   "favicon": {
     "svg": null,
-    "png": null,
-    "appleTouchIcon": null
+    "png": "/images/site/bond-32x32.png",
+    "appleTouchIcon": "/images/site/bond-180x180.png"
   },
   "socialLinks": {
     "github": "https://github.com/pureastar",
