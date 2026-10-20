@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { createWithBase } from '../utils/format';
+
+const withBase = createWithBase(import.meta.env.BASE_URL ?? '/');
+---
+
+<BaseLayout title="页面未找到" description="这个页面不存在，或已被移动。" allowReadingMode={false}>
+  <meta slot="head" name="robots" content="noindex, follow" />
+  <section class="not-found" aria-labelledby="not-found-title">
+    <p class="not-found__code">404</p>
+    <h1 id="not-found-title">页面未找到</h1>
+    <p>这个页面不存在，或已被移动。请检查链接，或返回浏览其他文章。</p>
+    <nav aria-label="页面导航">
+      <a href={withBase('/')}>返回首页</a>
+      <a href={withBase('/archive/')}>浏览归档</a>
+    </nav>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found { max-width: 40rem; margin: 5rem auto; padding: 0 1.5rem; }
+  .not-found__code { font-size: 3rem; line-height: 1; opacity: 0.6; }
+  h1 { margin: 1rem 0; }
+  nav { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 2rem; }
+  nav a { text-decoration: underline; text-underline-offset: 0.25em; }
+</style>
