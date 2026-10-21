@@ -8,6 +8,6 @@
   "showIntroLead": true,
   "showIntroMore": false,
   "heroPresetId": "default",
-  "heroImageSrc": null,
-  "heroImageAlt": "Whono theme preview"
+  "heroImageSrc": "src/assets/home-sunset.jpg",
+  "heroImageAlt": "晚霞下的屋顶与天线"
 }
