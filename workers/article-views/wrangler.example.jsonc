@@ -1,0 +1,17 @@
+{
+  // Copy to an operator-only deployment directory; fill actual IDs after review.
+  "name": "astro-whono-article-views",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-21",
+  "workers_dev": false,
+  "preview_urls": false,
+  "vars": { "VIEWS_ENABLED": "false" },
+  "routes": [],
+  "d1_databases": [{ "binding": "DB", "database_name": "astro-whono-article-views", "database_id": "REPLACE_WITH_REVIEWED_ID", "migrations_dir": "migrations" }],
+  // These namespace IDs MUST be replaced with verified unused values.
+  "ratelimits": [
+    { "name": "READ_LIMIT", "namespace_id": "REPLACE_WITH_UNUSED_NUMBER", "simple": { "limit": 60, "period": 60 } },
+    { "name": "WRITE_LIMIT", "namespace_id": "REPLACE_WITH_ANOTHER_UNUSED_NUMBER", "simple": { "limit": 20, "period": 60 } }
+  ],
+  "triggers": { "crons": ["17 3 * * *"] }
+}

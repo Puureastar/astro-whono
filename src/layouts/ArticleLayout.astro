@@ -2,6 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import UiIcon from '../components/UiIcon.astro';
 import Lightbox from '../components/Lightbox.astro';
+import ArticleViews from '../components/ArticleViews.astro';
 import '../styles/article.css';
 import { getEssayDerivedText, type EssayEntry } from '../lib/content';
 import { containsMarkdownMath } from '../lib/markdown-math';
@@ -59,7 +60,8 @@ const numberFormatter = new Intl.NumberFormat('zh-CN');
 const shouldShowMetaLine = articleMetaSettings.showDate
   || (articleMetaSettings.showTags && visibleTags.length > 0)
   || articleMetaSettings.showWordCount
-  || articleMetaSettings.showReadingTime;
+  || articleMetaSettings.showReadingTime
+  || Boolean(entry.data.viewId && !entry.data.draft);
 
 ---
 
@@ -123,6 +125,7 @@ const shouldShowMetaLine = articleMetaSettings.showDate
             约 {numberFormatter.format(articleReadingStats.readingMinutes)} 分钟
           </span>
         ) : null}
+        <ArticleViews id={entry.data.viewId} draft={entry.data.draft} />
       </div>
     ) : null}
   </div>

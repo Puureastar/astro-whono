@@ -27,7 +27,8 @@ const essayBaseFields = {
 const essayShape = {
   ...essayBaseFields,
   cover: z.string().optional(),
-  badge: z.string().optional()
+  badge: z.string().optional(),
+  viewId: z.string().regex(/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/).optional()
 };
 
 const essaySchema = z.object(essayShape).transform((data, ctx) => {

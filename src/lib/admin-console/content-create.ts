@@ -1,4 +1,4 @@
-import { createHash } from 'node:crypto';
+import { createHash, randomUUID } from 'node:crypto';
 import { access, mkdir } from 'node:fs/promises';
 import path from 'node:path';
 import {
@@ -324,7 +324,7 @@ const buildEssayContentCreatePlan = async (
     relativePath,
     sourceText: patchMarkdownFrontmatter(
       EMPTY_MARKDOWN_SOURCE,
-      Object.entries(frontmatter).map(([key, value]) => ({
+      Object.entries({ ...frontmatter, viewId: randomUUID() }).map(([key, value]) => ({
         path: [key],
         value,
         action: 'set' as const

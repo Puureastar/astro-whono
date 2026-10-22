@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile, rename } from 'node:fs/promises';
 import path from 'node:path';
 import {
   createJsonRequest,
@@ -10,6 +10,34 @@ import {
 
 describe('admin content essay write contract', () => {
   const getTempRoot = setupAdminContentWriteFixture();
+
+  it('preserves the reading identity when renaming a file and saving title, slug and body', async () => {
+    const { patchMarkdownFrontmatter } = await import('../src/lib/admin-console/frontmatter');
+    const original = path.join(getTempRoot(), 'src/content/essay/demo.md');
+    const target = path.join(getTempRoot(), 'src/content/essay/renamed.md');
+    const id = 'f0edfa90-8d05-4d6b-bb06-1247f68ec7d0';
+    await writeFile(original, patchMarkdownFrontmatter(await readFile(original, 'utf8'), [
+      { path: ['viewId'], value: id, action: 'set' }
+    ]));
+    await rename(original, target);
+    const { readAdminContentEntryEditorPayload } = await import('../src/lib/admin-console/content-shared');
+    const { POST } = await import('../src/pages/api/admin/content/entry');
+    const current = await readAdminContentEntryEditorPayload('essay', 'renamed');
+    const response = await POST({
+      request: createJsonRequest('http://127.0.0.1:4321/api/admin/content/entry', {
+        collection: 'essay', entryId: 'renamed', revision: current.revision,
+        frontmatter: { ...current.values, title: 'Renamed article', slug: 'new-public-slug' },
+        body: 'Updated body\n'
+      }),
+      url: new URL('http://127.0.0.1:4321/api/admin/content/entry')
+    } as never);
+    expect(response.status).toBe(200);
+    const saved = await readFile(target, 'utf8');
+    expect(saved).toContain('viewId: ' + id);
+    expect(saved).toContain('title: Renamed article');
+    expect(saved).toContain('slug: new-public-slug');
+    expect(saved).toContain('Updated body\n');
+  });
 
   it('supports dry-run and real writes for essay frontmatter without changing body', async () => {
     const { readAdminContentEntryEditorPayload } = await import('../src/lib/admin-console/content-shared');

@@ -46,6 +46,7 @@ describe('admin content create contract', () => {
     expect(source).toContain('title: New Essay');
     expect(source).toContain('draft: true');
     expect(source).toContain('tags:');
+    expect(source).toMatch(/viewId: [0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/);
   });
 
   it('creates draft bits entries from a selected minute', async () => {

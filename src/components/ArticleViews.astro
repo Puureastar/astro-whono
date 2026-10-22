@@ -1,0 +1,15 @@
+---
+import { isViewId } from '../lib/article-views-contract';
+const { id, draft = false } = Astro.props as { id?: string; draft?: boolean };
+---
+{isViewId(id) && !draft ? (
+  <span class="meta-line__item" data-article-views={id} hidden>
+    阅读 <span data-article-views-number></span> 次
+  </span>
+) : null}
+<script>
+  import '../scripts/article-views';
+</script>
+<style>
+  [data-article-views][hidden] { display: none; }
+</style>
