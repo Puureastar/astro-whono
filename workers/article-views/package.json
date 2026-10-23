@@ -4,5 +4,5 @@
   "type": "module",
   "engines": { "node": "22.22.0" },
   "devDependencies": { "wrangler": "4.151.3" },
-  "scripts": { "test:runtime": "node tests/runtime.mjs" }
+  "scripts": { "test:runtime": "node tests/runtime.mjs && node tests/workerd.mjs" }
 }

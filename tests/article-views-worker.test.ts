@@ -95,6 +95,18 @@ describe('real SQLite counter and Worker request validation', () => {
     expect(sql.prepare('SELECT COUNT(*) AS n FROM view_receipts').get()?.['n']).toBe(0);
     sql.close();
   });
+  it('uses the workerd-supported manual mode and refuses manifest redirects', async () => {
+    const { env, sql } = fixture();
+    const fetchManifest = vi.fn(async (_input: unknown, options?: RequestInit) => {
+      expect(options?.redirect).toBe('manual');
+      return new Response(null, { status: 302, headers: { location: 'https://evil.invalid/' } });
+    });
+    const worker = createArticleViewsWorker(fetchManifest as unknown as typeof fetch);
+    expect((await worker.fetch(request('POST'), env)).status).toBe(503);
+    expect(fetchManifest).toHaveBeenCalledOnce();
+    expect(sql.prepare('SELECT COUNT(*) AS n FROM view_receipts').get()?.['n']).toBe(0);
+    sql.close();
+  });
   it('deletes expired receipts without deleting totals', async () => {
     const { worker, env, sql } = fixture();
     await worker.fetch(request('POST'), env);

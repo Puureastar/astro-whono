@@ -58,7 +58,9 @@ export function createArticleViewsWorker(fetcher: typeof fetch = fetch, now: () 
     if (loading) return loading;
     loading = (async () => {
       const response = await fetcher(ARTICLE_VIEWS_MANIFEST_URL, {
-        redirect: 'error', signal: AbortSignal.timeout(3000), cache: 'no-store',
+        // workerd supports manual/follow, but throws for redirect: 'error'.
+        // Manual plus the !ok check below rejects redirects without following them.
+        redirect: 'manual', signal: AbortSignal.timeout(3000), cache: 'no-store',
         headers: { accept: 'application/json', 'cache-control': 'no-cache' }
       });
       if (!response.ok || !response.headers.get('content-type')?.includes('application/json')) throw new Error('Manifest unavailable');

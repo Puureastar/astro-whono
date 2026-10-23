@@ -41,7 +41,7 @@ npm ci
 WRANGLER_SEND_METRICS=false npm run test:runtime
 ```
 
-`test:runtime` 仅使用本机 workerd/D1，验证 SQL 迁移、并发、预算、回滚、清理和限流绑定。无需 Cloudflare 登录，不创建远程数据库。其测试打包工具来自锁定的 Wrangler 依赖树。
+`test:runtime` 无需 Cloudflare 登录，不创建远程数据库。`runtime.mjs` 由 Node 控制，通过本机 workerd/D1 代理验证 SQL 迁移、并发、预算、回滚、清理和限流绑定；`workerd.mjs` 将完整默认 handler 和原生 fetch 放入 workerd，验证清单获取、计数去重及重定向拒绝。后者仅替换 HTTP 目的端，不替换 Worker 的 fetch 实现。Windows 下以脚本文本加载打包产物，并像 Wrangler 入口 facade 一样仅导出默认 handler，避免 Windows 模块路径和测试用 SQL 字符串导出的加载问题。测试工具来自锁定的 Wrangler 依赖树。
 
 ## 发布前置条件与顺序
 
